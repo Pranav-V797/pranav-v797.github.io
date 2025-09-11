@@ -1,0 +1,131 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #121212; /* dark background */
+    color: #eee;               /* light text */
+}
+
+/* Navbar */
+.navbar {
+    background-color: #000;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.8);
+}
+.navbar ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    flex-wrap: wrap; /* wraps navbar on small screens */
+}
+.navbar ul li {
+    margin: 0 20px;
+}
+.navbar ul li a {
+    color: #eee;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+.navbar ul li a:hover {
+    color: #ffcc00; /* gold hover */
+}
+
+/* Sections */
+.section {
+    max-width: 1000px;
+    margin: 80px auto;
+    padding: 40px;
+}
+
+/* Section Headings */
+.section h1 {
+    text-align: center;
+    font-size: 36px;
+    color: #ffcc00; /* gold heading */
+    margin-bottom: 40px;
+}
+
+/* About Me Card */
+.aboutme-section p {
+    font-size: 18px;
+    background-color: #1e1e1e; /* dark gray card */
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid #333;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    text-align: center;
+}
+
+/* Aspirations Section */
+.aspirations-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+.aspirations-container div {
+    flex: 1;
+    min-width: 300px;
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.aspirations-container div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.8);
+}
+.aspirations-container h2 {
+    color: #ffcc00;
+    margin-bottom: 15px;
+}
+.aspirations-container ul {
+    margin-left: 20px;
+}
+
+/* Skills Section */
+.skills-section p {
+    background-color: #1e1e1e;
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid #333;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    text-align: center;
+}
+
+/* Education Section */
+.education-section p {
+    background-color: #1e1e1e;
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid #333;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    text-align: center;
+}
+
+/* Responsive */
+@media(max-width:768px){
+    .aspirations-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .navbar ul {
+        justify-content: center;
+        gap: 15px;
+    }
+}
+
