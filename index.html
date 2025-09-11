@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Page</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212; /* Dark background */
+            color: #eee; /* Light text */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center; /* Center all text */
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #ffcc00; /* Gold heading */
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #bbb;
+        }
+
+        nav {
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 20px 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #121212;
+            background-color: #ffcc00;
+            padding: 15px 40px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background-color 0.3s, transform 0.2s;
+            display: inline-block;
+        }
+
+        nav ul li a:hover {
+            background-color: #ffaa00;
+            transform: scale(1.05);
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: #777;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Welcome to My Portfolio</h1>
+        <p>Select a portfolio to view:</p>
+    </header>
+
+    <main>
+        <nav>
+            <ul>
+                <li><a href="practice.html" target="_blank">Portfolio 01</a></li>
+                <li><a href="portfolio.html" target="_blank">Portfolio 02</a></li>
+            </ul>
+        </nav>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Pranav | All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>
+
