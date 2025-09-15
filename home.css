@@ -1,19 +1,19 @@
-/* Reset */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body */
+
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
-    background-color: #121212; /* dark background */
-    color: #eee;               /* light text */
+    background-color: #121212; 
+    color: #eee;               
 }
 
-/* Navbar */
+
 .navbar {
     background-color: #000;
     padding: 15px 0;
@@ -39,28 +39,27 @@ body {
     transition: color 0.3s;
 }
 .navbar ul li a:hover {
-    color: #ffcc00; /* gold hover */
+    color: #ffcc00; 
 }
 
-/* Sections */
+
 .section {
     max-width: 1000px;
     margin: 80px auto;
     padding: 40px;
 }
 
-/* Section Headings */
+
 .section h1 {
     text-align: center;
     font-size: 36px;
-    color: #ffcc00; /* gold heading */
+    color: #ffcc00; 
     margin-bottom: 40px;
 }
 
-/* About Me Card */
 .aboutme-section p {
     font-size: 18px;
-    background-color: #1e1e1e; /* dark gray card */
+    background-color: #1e1e1e; 
     padding: 25px;
     border-radius: 20px;
     border: 1px solid #333;
@@ -68,7 +67,7 @@ body {
     text-align: center;
 }
 
-/* Aspirations Section */
+
 .aspirations-container {
     display: flex;
     flex-wrap: wrap;
@@ -107,7 +106,7 @@ body {
     text-align: center;
 }
 
-/* Education Section */
+
 .education-section p {
     background-color: #1e1e1e;
     padding: 25px;
