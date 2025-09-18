@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Date Spanner</title>
+
+  <!-- Flatpickr CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      position: relative;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      backdrop-filter: blur(8px);
+      text-align: center;
+      width: 420px;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    p {
+      margin-bottom: 25px;
+      font-size: 1rem;
+    }
+
+    .date-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .date-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+      color: #eee;
+    }
+
+    .date-group input {
+      width: 100%;
+      padding: 12px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      background: #fff;
+      color: #333;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+      width: 100%;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+
+    #resultBox {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 10px;
+      display: none;
+    }
+
+    .result-line {
+      margin: 8px 0;
+      font-size: 1.1rem;
+    }
+
+    /* Surrounding icons */
+    .icon-frame {
+      position: absolute;
+      font-size: 1.5rem;
+      color: rgba(255,255,255,0.6);
+      z-index: 1;
+    }
+
+    /* Corners */
+    .top-left { top: 10%; left: 20%; }
+    .top-right { top: 10%; right: 20%; }
+    .bottom-left { bottom: 10%; left: 20%; }
+    .bottom-right { bottom: 10%; right: 20%; }
+
+    /* Sides */
+    .left-center { top: 50%; left: 5%; transform: translateY(-50%); }
+    .right-center { top: 50%; right: 5%; transform: translateY(-50%); }
+    .top-center { top: 5%; left: 50%; transform: translateX(-50%); }
+    .bottom-center { bottom: 5%; left: 50%; transform: translateX(-50%); }
+  </style>
+</head>
+<body>
+  <!-- Icons around box -->
+  <i class="fa-solid fa-calendar-days icon-frame top-left"></i>
+  <i class="fa-solid fa-hourglass-half icon-frame top-center"></i>
+  <i class="fa-solid fa-calendar-week icon-frame top-right"></i>
+  <i class="fa-solid fa-clock icon-frame left-center"></i>
+  <i class="fa-solid fa-clock-rotate-left icon-frame right-center"></i>
+  <i class="fa-solid fa-calendar-check icon-frame bottom-left"></i>
+  <i class="fa-solid fa-calendar icon-frame bottom-center"></i>
+  <i class="fa-solid fa-calendar-alt icon-frame bottom-right"></i>
+
+  <div class="container">
+    <h1>Date Spanner</h1>
+    <p>Calculate Days Between 2 Dates</p>
+
+    <form onsubmit="return calcDate()">
+      <div class="date-group">
+        <label for="date1">Choose first date:</label>
+        <input type="text" id="date1" required>
+      </div>
+
+      <div class="date-group">
+        <label for="date2">Choose second date:</label>
+        <input type="text" id="date2" required>
+      </div>
+
+      <button type="submit">Calculate</button>
+    </form>
+
+    <div id="resultBox">
+      <div class="result-line" id="days"></div>
+      <div class="result-line" id="weeks"></div>
+      <div class="result-line" id="months"></div>
+      <div class="result-line" id="years"></div>
+    </div>
+  </div>
+
+  <!-- Flatpickr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script>
+    flatpickr("#date1", {
+      dateFormat: "d F Y",
+      altInput: true,
+      altFormat: "d F Y",
+      allowInput: true
+    });
+
+    flatpickr("#date2", {
+      dateFormat: "d F Y",
+      altInput: true,
+      altFormat: "d F Y",
+      allowInput: true
+    });
+
+    function calcDate() {
+      let d1 = new Date(document.getElementById("date1").value);
+      let d2 = new Date(document.getElementById("date2").value);
+
+      if (d1 > d2) {
+        [d1, d2] = [d2, d1];
+      }
+
+      let diffTime = Math.abs(d2 - d1);
+      let diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      let diffWeeks = Math.floor(diffDays / 7);
+      let diffMonths = Math.floor(diffDays / 30.44);
+      let diffYears = Math.floor(diffDays / 365.25);
+
+      document.getElementById("days").textContent = `📅 Days: ${diffDays}`;
+      document.getElementById("weeks").textContent = `🗓️ Weeks: ${diffWeeks}`;
+      document.getElementById("months").textContent = `📆 Months: ${diffMonths}`;
+      document.getElementById("years").textContent = `🎉 Years: ${diffYears}`;
+
+      document.getElementById("resultBox").style.display = "block";
+      return false;
+    }
+  </script>
+</body>
+</html>
+
+
+

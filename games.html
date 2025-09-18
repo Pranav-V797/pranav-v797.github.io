@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dice Roller</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      overflow: hidden;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      backdrop-filter: blur(8px);
+      text-align: center;
+      width: 350px;
+    }
+
+    h1 {
+      margin-bottom: 15px;
+      font-size: 2rem;
+      color: #fff;
+    }
+
+    p {
+      margin-bottom: 25px;
+      font-size: 1rem;
+      color: #eee;
+    }
+
+    .dice {
+      font-size: 4rem;
+      margin: 20px 0;
+      color: #fff;
+      transition: transform 0.4s ease;
+    }
+
+    .rolling {
+      animation: shake 0.6s infinite;
+    }
+
+    @keyframes shake {
+      0% { transform: rotate(0deg) translate(0, 0); }
+      25% { transform: rotate(10deg) translate(3px, -3px); }
+      50% { transform: rotate(-10deg) translate(-3px, 3px); }
+      75% { transform: rotate(10deg) translate(3px, 3px); }
+      100% { transform: rotate(0deg) translate(0, 0); }
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    #result {
+      margin-top: 15px;
+      font-size: 1.2rem;
+      color: #fff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎲 Dice Roller</h1>
+    <p>Click the button to roll the dice</p>
+
+    <div id="diceIcon" class="dice"><i class="fa-solid fa-dice-one"></i></div>
+
+    <button onclick="rollDice()">Roll Dice</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const diceFaces = [
+      "fa-dice-one",
+      "fa-dice-two",
+      "fa-dice-three",
+      "fa-dice-four",
+      "fa-dice-five",
+      "fa-dice-six"
+    ];
+
+    function rollDice() {
+      const dice = document.getElementById("diceIcon");
+      const result = document.getElementById("result");
+
+      // Add rolling animation
+      dice.classList.add("rolling");
+      result.textContent = "Rolling...";
+
+      setTimeout(() => {
+        // Generate random number
+        const roll = Math.floor(Math.random() * 6);
+
+        // Update dice face
+        dice.innerHTML = `<i class="fa-solid ${diceFaces[roll]}"></i>`;
+        
+        // Show result
+        result.textContent = `You rolled a ${roll + 1}!`;
+
+        // Remove animation
+        dice.classList.remove("rolling");
+      }, 1200);
+    }
+  </script>
+</body>
+</html>
