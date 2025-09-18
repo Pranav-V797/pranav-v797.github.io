@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #99FF99;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background: #fff;
+            padding: 30px 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form id="myForm" onsubmit="return validateForm()">
+        <h1>Simple Form Validation</h1>
+
+        <p>Username: <input type="text" id="username" name="username"></p>
+        <div id="userError" class="error"></div>
+
+        <p>Email: <input type="text" id="email" name="email"></p>
+        <div id="emailError" class="error"></div>
+
+        <p>Password: <input type="password" id="password1" name="password1"></p>
+        <div id="passError" class="error"></div>
+
+        <p>Repeat Password: <input type="password" id="password2" name="password2"></p>
+        <div id="pass2Error" class="error"></div>
+
+        <p><input type="submit" value="Submit"></p>
+    </form>
+
+    <script>
+        function validateForm() {
+            let isValid = true;
+
+            // Clear previous errors
+            document.getElementById('userError').innerText = "";
+            document.getElementById('emailError').innerText = "";
+            document.getElementById('passError').innerText = "";
+            document.getElementById('pass2Error').innerText = "";
+
+            // Username validation
+            const username = document.getElementById('username').value.trim();
+            if (username === "") {
+                document.getElementById('userError').innerText = "Username cannot be empty";
+                isValid = false;
+            }
+
+            // Email validation (simple regex)
+            const email = document.getElementById('email').value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email === "") {
+                document.getElementById('emailError').innerText = "Email cannot be empty";
+                isValid = false;
+            } else if (!emailPattern.test(email)) {
+                document.getElementById('emailError').innerText = "Enter a valid email";
+                isValid = false;
+            }
+
+            // Password validation
+            const password1 = document.getElementById('password1').value;
+            const password2 = document.getElementById('password2').value;
+            if (password1.length < 6) {
+                document.getElementById('passError').innerText = "Password must be at least 6 characters";
+                isValid = false;
+            }
+            if (password1 !== password2) {
+                document.getElementById('pass2Error').innerText = "Passwords do not match";
+                isValid = false;
+            }
+
+            return isValid; // prevent form submission if false
+        }
+    </script>
+</body>
+</html>
