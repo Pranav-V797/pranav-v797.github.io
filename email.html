@@ -1,127 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Form Validation</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #99FF99;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+<meta charset="UTF-8">
+<title>Form Validation</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+}
 
-        form {
-            background: #fff;
-            padding: 30px 50px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
+.container {
+  width: 380px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 30px;
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: 0 15px 25px rgba(0,0,0,0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.2);
+}
 
-        h1 {
-            text-align: center;
-            color: #333;
-        }
+h1 {
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+}
 
-        p {
-            margin-bottom: 15px;
-        }
+input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  border: none;
+  font-size: 1rem;
+  text-align: center;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  transition: all 0.3s ease;
+}
 
-        input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-        }
+input:focus {
+  background: rgba(255,255,255,0.25);
+  box-shadow: 0 0 10px rgba(255,255,255,0.3);
+  outline: none;
+}
 
-        input[type="submit"] {
-            width: 100%;
-            padding: 12px;
-            font-size: 18px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 15px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  cursor: pointer;
+  color: #fff;
+  font-size: 1rem;
+}
 
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
 
-        .error {
-            color: red;
-            font-size: 14px;
-            margin-top: -10px;
-            margin-bottom: 10px;
-        }
-    </style>
+#message {
+  margin-top: 10px;
+  color: #ffeb3b;
+  font-size: 0.95rem;
+}
+</style>
 </head>
 <body>
-    <form id="myForm" onsubmit="return validateForm()">
-        <h1>Simple Form Validation</h1>
 
-        <p>Username: <input type="text" id="username" name="username"></p>
-        <div id="userError" class="error"></div>
+<div class="container">
+  <h1>Form Validation</h1>
+  <form id="myForm">
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="text" id="email" placeholder="Email" required>
+    <input type="password" id="password1" placeholder="Password" required>
+    <input type="password" id="password2" placeholder="Repeat Password" required>
+    <button type="submit">Submit</button>
+    <div id="message"></div>
+  </form>
+</div>
 
-        <p>Email: <input type="text" id="email" name="email"></p>
-        <div id="emailError" class="error"></div>
+<script>
+const form = document.getElementById('myForm');
+const message = document.getElementById('message');
 
-        <p>Password: <input type="password" id="password1" name="password1"></p>
-        <div id="passError" class="error"></div>
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const username = document.getElementById('username').value;
+  const email = document.getElementById('email').value;
+  const password1 = document.getElementById('password1').value;
+  const password2 = document.getElementById('password2').value;
 
-        <p>Repeat Password: <input type="password" id="password2" name="password2"></p>
-        <div id="pass2Error" class="error"></div>
+  let msgs = [];
 
-        <p><input type="submit" value="Submit"></p>
-    </form>
+  if (!username) msgs.push("Username required");
+  if (!email.match(/^\S+@\S+\.\S+$/)) msgs.push("Invalid email");
+  if (password1.length < 8) msgs.push("Password must be 8+ chars");
+  if (password1 !== password2) msgs.push("Passwords do not match");
 
-    <script>
-        function validateForm() {
-            let isValid = true;
-
-            // Clear previous errors
-            document.getElementById('userError').innerText = "";
-            document.getElementById('emailError').innerText = "";
-            document.getElementById('passError').innerText = "";
-            document.getElementById('pass2Error').innerText = "";
-
-            // Username validation
-            const username = document.getElementById('username').value.trim();
-            if (username === "") {
-                document.getElementById('userError').innerText = "Username cannot be empty";
-                isValid = false;
-            }
-
-            // Email validation (simple regex)
-            const email = document.getElementById('email').value.trim();
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (email === "") {
-                document.getElementById('emailError').innerText = "Email cannot be empty";
-                isValid = false;
-            } else if (!emailPattern.test(email)) {
-                document.getElementById('emailError').innerText = "Enter a valid email";
-                isValid = false;
-            }
-
-            // Password validation
-            const password1 = document.getElementById('password1').value;
-            const password2 = document.getElementById('password2').value;
-            if (password1.length < 6) {
-                document.getElementById('passError').innerText = "Password must be at least 6 characters";
-                isValid = false;
-            }
-            if (password1 !== password2) {
-                document.getElementById('pass2Error').innerText = "Passwords do not match";
-                isValid = false;
-            }
-
-            return isValid; // prevent form submission if false
-        }
-    </script>
+  if (msgs.length > 0) {
+    message.innerHTML = "⚠️ " + msgs.join("<br>");
+  } else {
+    message.innerHTML = "✅ Form submitted successfully!";
+  }
+});
+</script>
 </body>
 </html>
+
