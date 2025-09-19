@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Random Quote Generator</title>
+<style>
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+}
+
+.container {
+  width: 420px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 25px;
+  padding: 50px 30px;
+  text-align: center;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-5px);
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+#quote {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  transition: opacity 0.3s ease;
+}
+
+button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Random Quote Generator</h1>
+  <div id="quote">Click the button below to get inspired!</div>
+  <button onclick="generateQuote()">New Quote</button>
+</div>
+
+<script>
+const quotes = [
+  "Believe you can and you're halfway there.",
+  "Success is not final, failure is not fatal; it is the courage to continue that counts.",
+  "Don't watch the clock; do what it does. Keep going.",
+  "The harder you work for something, the greater you'll feel when you achieve it.",
+  "Dream it. Wish it. Do it.",
+  "Keep your eyes on the stars, and your feet on the ground.",
+  "Great things never come from comfort zones.",
+  "Small steps every day.",
+  "Push yourself, no one else is going to do it for you.",
+  "Don't stop when you're tired, stop when you're done.",
+  "Strive for progress, not perfection.",
+  "Do something today that your future self will thank you for.",
+  "Success doesn't come to you, you go to it.",
+  "Your only limit is you.",
+  "Don't wait for opportunity. Create it.",
+  "Hard work beats talent when talent doesn’t work hard.",
+  "Mistakes are proof that you are trying.",
+  "Motivation gets you started, habit keeps you going.",
+  "Stay positive, work hard, make it happen.",
+  "Believe in yourself and all that you are.",
+  "Great things take time.",
+  "Turn your dreams into plans.",
+  "Every day is a second chance.",
+  "Hustle in silence, let success make the noise."
+];
+
+function generateQuote() {
+  const quoteDiv = document.getElementById("quote");
+  quoteDiv.style.opacity = 0;
+  setTimeout(() => {
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+    quoteDiv.textContent = quotes[randomIndex];
+    quoteDiv.style.opacity = 1;
+  }, 250);
+}
+</script>
+
+</body>
+</html>
